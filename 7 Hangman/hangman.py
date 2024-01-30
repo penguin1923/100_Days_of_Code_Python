@@ -1,7 +1,9 @@
+"""Hangman Game"""
 import random
+import os
 import hangman_words
 import hangman_art
-import os
+
 
 chosen_word = random.choice(hangman_words.word_list)
 display = []
@@ -10,11 +12,12 @@ blank = "_"
 for letter in range(len(chosen_word)):
     display.append(blank)
 print(hangman_art.logo)
-print(f'Pssst, the solution is {chosen_word}.')
+## print(f'Pssst, the solution is {chosen_word}.')
 print(f"{' '.join(display)}")
 end_of_game = False
 
 def clear_screen():
+    """Function to clear screen before each output"""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 while not end_of_game:
