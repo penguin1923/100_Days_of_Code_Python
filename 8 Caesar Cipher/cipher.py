@@ -2,56 +2,50 @@ import cipher_alphabet
 import cipher_art
 
 print(cipher_art.logo)
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-text = input("Type your message:\n").lower()
-shift = int(input("Type the shift number:\n"))
-text_index = []
-new_word = []
 
-def encrypt(texts,shifts):
-    for letter in texts:
-        text_index.append(letter)
+should_continue = True
 
-    for letter in text_index:
-        index1 = cipher_alphabet.alphabet.index(letter)
+while should_continue:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+    text_index = []
+    new_word = []
 
-        if (index1 + shifts)<=25:
-            index2 = cipher_alphabet.alphabet[index1 + shifts]
-            new_word.append(index2)
-        else:
-            index2 = cipher_alphabet.alphabet[(index1 + shifts)-26]
-            new_word.append(index2)
+    def caesar(text_input,shift_count,cipher_direction):
+        for letter in text_input:
+            text_index.append(letter)
 
-def decrypt(texts,shifts):
-    for letter in texts:
-        text_index.append(letter)
+        for char in text_index:
+            if char in cipher_alphabet.alphabet:
 
-    for letter in text_index:
-        index1 = cipher_alphabet.alphabet.index(letter)
-        # this isn't technically needed as python can accept negative index locations
-        if (index1 - shifts) <= 25:
-            index2 = cipher_alphabet.alphabet[index1 - shifts]
-            new_word.append(index2)
-        else:
-            index_location = (index1 - shifts) + 26
-            index2 = cipher_alphabet.alphabet[index_location]
-            new_word.append(index2)
+                index_number = cipher_alphabet.alphabet.index(char)
 
+                if cipher_direction == "encode":
+                    index_letter = cipher_alphabet.alphabet[(index_number + shift_count) % 26]
+                    new_word.append(index_letter)
+                elif cipher_direction == "decode":
+                    index_letter = cipher_alphabet.alphabet[(index_number - shift_count) % 26]
+                    new_word.append(index_letter)
+                else:
+                    continue
+            else:
+                new_word.append(char)
 
-
-condition = True
-
-while condition:
-    if direction == "encode":
-        encrypt(texts=text,shifts=shift)
         joined_new_word = "".join(new_word)
-        print(f"The encoded text is {joined_new_word}")
-        condition = False
-    elif direction == "decode":
-        decrypt(texts=text,shifts=shift)
-        joined_new_word = "".join(new_word)
-        print(f"The decoded text is {joined_new_word}")
-        condition = False
+
+        if cipher_direction == "encode" or "decode":
+            print(f"The {cipher_direction}d text is {joined_new_word}")
+        else:
+            print("That was not a valid option.")
+
+    caesar(text_input=text,shift_count=shift,cipher_direction=direction)
+    result = input("Type 'yes' if you would like to run the Caesar Cipher again? Otherwise type 'no'.\n ")
+    if result == "yes":
+        should_continue = True
+    elif result == "no":
+        should_continue = False
+        print("Goodbye")
     else:
-        print("That is not a valid option please try again")
-        condition = False
+        should_continue = False
+        print("Invalid response.... Terminating")
