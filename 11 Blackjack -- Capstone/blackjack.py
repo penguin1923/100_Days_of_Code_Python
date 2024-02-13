@@ -1,22 +1,19 @@
+"""Terminal Blackjack Game"""
 import random
 import os
 import blackjack_art
 
-
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-random_card = -1
-player_score = -1
 player_cards = []
 dealer_cards = []
-print(blackjack_art.logo)
-
 
 def deal_card():
+    """deals a random card and returns random_card"""
+    cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
     random_card = random.choice(cards)
     return random_card
 
-
 def determine_score(a):
+    """evaluates the scores of the ongoing blackjack game to determine a winner"""
     score = sum(a)
     if score > 21:
         if 11 in player_cards:
@@ -27,8 +24,8 @@ def determine_score(a):
     else:
         return score
 
-
 def determine_winner():
+    """uses the outputs from the determine_score function to compare and determine a winner"""
     player_score = determine_score(player_cards)
     dealer_score = determine_score(dealer_cards)
     if player_score > 21:
@@ -44,8 +41,9 @@ def determine_winner():
             f"The dealer beat you.\nYou had a score of {player_score}\nThe dealer had a score of {dealer_score}"
         )
 
-
 def blackjack():
+    """The main function for the blackjack game"""
+    print(blackjack_art.logo)
     player_cards.append(deal_card())
     player_cards.append(deal_card())
     dealer_cards.append(deal_card())
