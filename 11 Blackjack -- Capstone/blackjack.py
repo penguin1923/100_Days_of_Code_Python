@@ -14,6 +14,7 @@ def deal_card():
     random_card = random.choice(cards)
     return random_card
 
+
 def determine_score(a):
     score = sum(a)
     if score > 21:
@@ -25,45 +26,59 @@ def determine_score(a):
     else:
         return score
 
+
 def determine_winner():
-    player_score=determine_score(player_cards)
-    dealer_score=determine_score(dealer_cards)
-    if player_score>21:
+    player_score = determine_score(player_cards)
+    dealer_score = determine_score(dealer_cards)
+    if player_score > 21:
         print(f"You Busted with a score of {player_score}")
-    elif player_score>dealer_score:
-        print(f"You beat the dealer!!\nYou had a score of {player_score}\nThe dealer had a score of {dealer_score}")
+    elif dealer_score > 21:
+        print(f"You win the dealer busted with a score of {dealer_score}")
+    elif player_score > dealer_score:
+        print(
+            f"You beat the dealer!!\nYou had a score of {player_score}\nThe dealer had a score of {dealer_score}"
+        )
     else:
-        print(f"The dealer beat you.\nYou had a score of {player_score}\nThe dealer had a score of {dealer_score}")
+        print(
+            f"The dealer beat you.\nYou had a score of {player_score}\nThe dealer had a score of {dealer_score}"
+        )
+
 
 def blackjack():
     player_cards.append(deal_card())
     player_cards.append(deal_card())
     dealer_cards.append(deal_card())
     dealer_cards.append(deal_card())
-    print(f"Your cards are {player_cards[0]} and {player_cards[1]} for a score of {determine_score(player_cards)}")
+    print(
+        f"Your cards are {player_cards[0]} and {player_cards[1]} for a score of {determine_score(player_cards)}"
+    )
     print(f"The dealer is showing {dealer_cards[0]}")
-    
+
     did_hit = True
 
-    while did_hit:   
+    while did_hit:
         if determine_score(dealer_cards) == 21:
             print("The dealer was dealt Blackjack\n You Loose!!")
-            did_hit=False
+            did_hit = False
             break
         elif determine_score(player_cards) == 21:
             print("BlackJack !!!")
             did_hit = False
             break
         hit = input("Would you like to get another card? 'y' or 'n' ")
-        if hit == 'y':
+        if hit == "y":
             player_cards.append(deal_card())
-            print(f"Your new card is {player_cards[-1]} for a score of {determine_score(player_cards)}")
-            if determine_score(player_cards)>21:
+            print(
+                f"Your new card is {player_cards[-1]} for a score of {determine_score(player_cards)}"
+            )
+            if determine_score(player_cards) > 21:
                 determine_winner()
                 did_hit = False
         else:
+            while determine_score(dealer_cards)<16:
+                dealer_cards.append(deal_card())
             determine_winner()
-            did_hit= False
+            did_hit = False
 
 
 # play_again = True
