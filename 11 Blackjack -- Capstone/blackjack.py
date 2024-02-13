@@ -1,12 +1,13 @@
 import random
+import os
 import blackjack_art
 
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-player_cards = []
-dealer_cards = []
 random_card = -1
 player_score = -1
+player_cards = []
+dealer_cards = []
 print(blackjack_art.logo)
 
 
@@ -75,19 +76,20 @@ def blackjack():
                 determine_winner()
                 did_hit = False
         else:
-            while determine_score(dealer_cards)<16:
+            while determine_score(dealer_cards) < 16:
                 dealer_cards.append(deal_card())
             determine_winner()
             did_hit = False
 
 
-# play_again = True
-# again = input("Would you like to play again? 'y' or 'n' ")
+def clear_screen():
+    """Function to clear screen before each output"""
+    os.system("cls" if os.name == "nt" else "clear")
 
-# while play_again:
-#     if again == 'y':
-#         blackjack()
-#     else:
-#         play_again = False
 
 blackjack()
+while input("Would you like to play again? 'y' or 'n' ") == "y":
+    clear_screen()
+    player_cards = []
+    dealer_cards = []
+    blackjack()
