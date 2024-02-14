@@ -24,9 +24,9 @@ print("Welcome to Treasure Island.")
 print("Your mission is to find the treasure.")
 choice = input("You come to the end of a hallway and can either go 'left' or 'right'. Pick one now.\n")
 if choice.lower() == "left":
-    choice = input("You now are at a river. Should you 'swim' or 'wait'?\n")
+    choice = input("You now are at a river. Should you 'swim' or 'wait' for the boat?\n")
     if choice.lower() == "wait":
-        choice = input("Now you are in front of three doors and you need to pick one. Should you go in the 'red' on the 'blue' one or the 'yellow' one?\n")
+        choice = input("Now you are in front of three doors and you need to pick one before the pirates on the beach catch you. Should you go in the 'red' on the 'blue' one or the 'yellow' one?\n")
         if choice.lower() == "yellow":
             print("You Win!!! The room is full of treasure and there is an uber waiting outside to carry it all home.")
         elif choice.lower() == "blue":
