@@ -9,16 +9,16 @@ MENU = {
     "latte": {
         "ingredients": {
             "water": 200,
-            "milk": 150,
             "coffee": 24,
+            "milk": 150,
         },
         "cost": 2.5,
     },
     "cappuccino": {
         "ingredients": {
             "water": 250,
-            "milk": 100,
             "coffee": 24,
+            "milk": 100,
         },
         "cost": 3.0,
     }
@@ -26,6 +26,6 @@ MENU = {
 
 resources = {
     "water": 300,
-    "milk": 200,
     "coffee": 100,
+    "milk": 200,
 }
